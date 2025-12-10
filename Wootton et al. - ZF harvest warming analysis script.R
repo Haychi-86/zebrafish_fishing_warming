@@ -914,7 +914,7 @@ Dev_A50_Fdata$Treat <- as.factor(paste(Dev_A50_Fdata$Temperature,Dev_A50_Fdata$S
 Dev_A50_Fdata$Treat <- relevel(Dev_A50_Fdata$Treat , ref="L_C")
 
 # first fit the full model to check fit
-A50FM <- lmer(Deviance ~ Treat*Generation + (1|Tank) + (1|Generation), data = Dev_A50_Fdata, REML = T)# 
+A50FM <- lmer(Deviance ~ Treat*Generation + (1|Population) + (1|Tank) + (1|Generation), data = Dev_A50_Fdata, REML = T)# 
 
 plot(A50FM) # check resid spread 
 
@@ -939,25 +939,25 @@ anova(A50FM1a, A50FM1b)
 #Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 # now fit the supported model
-A50FM1best <- lmer(Deviance ~ Treat*Generation + (1|Tank) + (1|Generation), data = Dev_A50_Fdata, REML = T)# 
+A50FM1best <- lmer(Deviance ~ Treat*Generation + (1|Population) + (1|Tank) + (1|Generation), data = Dev_A50_Fdata, REML = T)# 
 
 plot(allEffects(A50FM1best)) # gives good visual of parameter estimates
 
 summary(A50FM1best)
 #Fixed effects:
 #                      Estimate Std. Error         df t value Pr(>|t|)  
-#(Intercept)          7.968e-14  2.016e+00  5.297e+01   0.000   1.0000  
-#TreatH_C            -1.871e+00  2.767e+00  8.991e+01  -0.676   0.5007  
-#TreatH_G            -3.554e+00  2.767e+00  8.991e+01  -1.285   0.2022  
-#TreatH_S            -1.300e+00  2.786e+00  8.997e+01  -0.467   0.6419  
-#TreatL_G            -1.701e+00  2.911e+00  9.032e+01  -0.585   0.5603  
-#TreatL_S            -1.434e+00  2.767e+00  8.991e+01  -0.518   0.6056  
-#Generation          -2.300e-14  6.660e-01  5.297e+01   0.000   1.0000  
-#TreatH_C:Generation -2.286e+00  9.138e-01  8.991e+01  -2.502   0.0142 *
-#TreatH_G:Generation -1.831e+00  9.138e-01  8.991e+01  -2.003   0.0482 *
-#TreatH_S:Generation -1.226e+00  9.465e-01  9.020e+01  -1.296   0.1984  
-#TreatL_G:Generation  1.198e+00  9.465e-01  9.020e+01   1.266   0.2088  
-#TreatL_S:Generation  1.036e+00  9.138e-01  8.991e+01   1.133   0.2601   
+#(Intercept)          7.826e-14  2.057e+00  4.357e+01   0.000   1.0000  
+#TreatH_C            -1.871e+00  2.827e+00  5.839e+01  -0.662   0.5107  
+#TreatH_G            -3.554e+00  2.827e+00  5.839e+01  -1.257   0.2136  
+#TreatH_S            -1.349e+00  2.846e+00  5.899e+01  -0.474   0.6372  
+#TreatL_G            -1.658e+00  2.967e+00  6.265e+01  -0.559   0.5784  
+#TreatL_S            -1.434e+00  2.827e+00  5.839e+01  -0.507   0.6140  
+#Generation          -2.081e-14  6.569e-01  4.875e+01   0.000   1.0000  
+#TreatH_C:Generation -2.286e+00  9.008e-01  7.813e+01  -2.538   0.0131 *
+#TreatH_G:Generation -1.831e+00  9.008e-01  7.813e+01  -2.032   0.0455 *
+#TreatH_S:Generation -1.189e+00  9.338e-01  7.962e+01  -1.274   0.2065  
+#TreatL_G:Generation  1.186e+00  9.338e-01  7.962e+01   1.270   0.2076  
+#TreatL_S:Generation  1.036e+00  9.008e-01  7.813e+01   1.150   0.2537   
 
 confint(A50FM1best)
 #                         2.5 %     97.5 %
@@ -1167,7 +1167,7 @@ Dev_L50_Fdata$Treat <- as.factor(paste(Dev_L50_Fdata$Temperature,Dev_L50_Fdata$S
 Dev_L50_Fdata$Treat <- relevel(Dev_L50_Fdata$Treat , ref="L_C")
 
 # first fit the full model to check fit
-L50FM <- lmer(Deviance ~ Treat*Generation   + (1|Tank) + (1|Generation), data = Dev_L50_Fdata, REML = T)
+L50FM <- lmer(Deviance ~ Treat*Generation + (1|Population)  + (1|Tank) + (1|Generation), data = Dev_L50_Fdata, REML = T)
 
 plot(L50FM) # check resid spread 
 
@@ -1192,25 +1192,25 @@ anova(L50FMa, L50FMb)
 #Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 # now fit the supported model
-L50FMbest <- lmer(Deviance ~ Treat*Generation + (1|Tank) + (1|Generation), data = Dev_L50_Fdata, REML = T)# 
+L50FMbest <- lmer(Deviance ~ Treat*Generation + (1|Population) + (1|Tank) + (1|Generation), data = Dev_L50_Fdata, REML = T)# 
 
 plot(allEffects(L50FMbest)) # gives good visual of parameter estimates
 
 summary(L50FMbest)
-#Fixed effects:
 #                      Estimate Std. Error         df t value Pr(>|t|)  
-#(Intercept)          1.768e-15  9.393e-01  2.159e+01   0.000   1.0000  
-#TreatH_C            -4.633e-01  1.121e+00  5.877e+01  -0.413   0.6809  
-#TreatH_G            -1.755e+00  1.121e+00  5.877e+01  -1.565   0.1228  
-#TreatH_S            -1.618e-01  1.129e+00  5.940e+01  -0.143   0.8865  
-#TreatL_G            -6.699e-01  1.064e+00  8.703e+01  -0.630   0.5306  
-#TreatL_S            -1.231e+00  1.064e+00  8.703e+01  -1.157   0.2506  
-#Generation          -5.182e-16  2.990e-01  2.045e+01   0.000   1.0000  
-#TreatH_C:Generation -3.214e-01  3.514e-01  8.703e+01  -0.915   0.3629  
-#TreatH_G:Generation  2.443e-01  3.514e-01  8.703e+01   0.695   0.4888  
-#TreatH_S:Generation -5.397e-01  3.644e-01  8.741e+01  -1.481   0.1423  
-#TreatL_G:Generation  7.890e-01  3.514e-01  8.703e+01   2.245   0.0273 *
-#TreatL_S:Generation  2.896e-01  3.514e-01  8.703e+01   0.824   0.4121  
+#(Intercept)          9.044e-16  9.580e-01  2.190e+01   0.000   1.0000  
+#TreatH_C            -4.633e-01  1.150e+00  4.839e+01  -0.403   0.6887  
+#TreatH_G            -1.755e+00  1.150e+00  4.839e+01  -1.527   0.1333  
+#TreatH_S            -1.755e-01  1.157e+00  4.903e+01  -0.152   0.8800  
+#TreatL_G            -6.699e-01  1.116e+00  3.943e+01  -0.600   0.5519  
+#TreatL_S            -1.231e+00  1.116e+00  3.943e+01  -1.102   0.2770  
+#Generation           6.513e-16  2.955e-01  1.953e+01   0.000   1.0000  
+#TreatH_C:Generation -3.214e-01  3.443e-01  7.916e+01  -0.933   0.3534  
+#TreatH_G:Generation  2.443e-01  3.443e-01  7.916e+01   0.709   0.4802  
+#TreatH_S:Generation -5.293e-01  3.575e-01  8.027e+01  -1.481   0.1426  
+#TreatL_G:Generation  7.890e-01  3.443e-01  7.916e+01   2.291   0.0246 *
+#TreatL_S:Generation  2.896e-01  3.443e-01  7.916e+01   0.841   0.4028  
+
 
 confint(L50FMbest)
 #                          2.5 %    97.5 %
